@@ -1,0 +1,246 @@
+/*
+ * EDIX WORKS — desktop reproduction.
+ * The original design uses a 1440px-wide canvas. The zoom rule keeps its
+ * proportions intact when viewed in a narrower desktop browser window.
+ */
+:root {
+  --blue: #0065a8;
+  --ink: #333333;
+  --soft-gray: #eeeeee;
+}
+
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  margin: 0;
+  width: 1440px;
+  zoom: calc(100vw / 1440px);
+  background: #fff;
+  color: var(--ink);
+  font-family: 'Noto Sans JP', 'Noto Sans CJK JP', sans-serif;
+  font-weight: 400;
+  -webkit-font-smoothing: antialiased;
+}
+a { color: inherit; text-decoration: none; }
+img { display: block; }
+h1, h2, h3, p { margin: 0; }
+
+/* Hero and desktop navigation */
+.hero {
+  position: relative;
+  height: 663px;
+  background: url('../assets/Figma_top.png') center center / 100% 100% no-repeat;
+}
+.site-header {
+  position: absolute;
+  z-index: 1;
+  inset: 40px 20px auto 22px;
+  height: 40px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.logo {
+  font-size: 22px;
+  line-height: 1;
+  font-weight: 700;
+  color: #222;
+}
+.navigation {
+  display: flex;
+  align-items: center;
+  gap: 48px;
+  font-size: 14px;
+  line-height: 1;
+}
+.navigation > a:not(.contact-button) { white-space: nowrap; }
+.contact-button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 150px;
+  height: 40px;
+  background: var(--blue);
+  border-radius: 24px;
+  color: #fff;
+  font-size: 14px;
+}
+.hero-copy {
+  position: absolute;
+  top: 273px;
+  left: 0;
+  width: 100%;
+  text-align: center;
+  color: #fff;
+}
+.hero-copy h1 {
+  font-size: 62px;
+  font-weight: 700;
+  line-height: 1.28;
+  letter-spacing: 1px;
+}
+.hero-copy p {
+  margin-top: 26px;
+  font-size: 14px;
+  line-height: 24px;
+  font-weight: 600;
+}
+
+/* Shared headings */
+.section-heading { text-align: center; }
+.section-heading h2 {
+  font-size: 48px;
+  font-weight: 700;
+  line-height: 58px;
+  letter-spacing: .15px;
+}
+.section-heading p {
+  color: var(--blue);
+  font-size: 13px;
+  font-weight: 700;
+  line-height: 20px;
+}
+
+/* Services */
+.service-section {
+  height: 662px;
+  padding-top: 150px;
+  background: #fff;
+}
+.service-list {
+  width: 1026px;
+  margin: 64px auto 0;
+  display: grid;
+  grid-template-columns: repeat(3, 300px);
+  gap: 63px;
+}
+.service-item { width: 300px; }
+.service-icon {
+  width: 142px;
+  height: 142px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--blue);
+  border-radius: 50%;
+}
+.service-icon img {
+  width: 90px;
+  height: 90px;
+  object-fit: contain;
+}
+.service-item h3 {
+  margin-top: 14px;
+  font-size: 24px;
+  font-weight: 700;
+  line-height: 36px;
+  text-align: center;
+}
+.service-item p {
+  margin-top: 10px;
+  font-size: 13px;
+  line-height: 16px;
+  letter-spacing: 0;
+  overflow-wrap: anywhere;
+}
+
+/* Work cards */
+.works-section {
+  height: 1295px;
+  padding-top: 36px;
+  background: #fff;
+  text-align: center;
+}
+.works-grid {
+  width: 1026px;
+  margin: 63px auto 0;
+  display: grid;
+  grid-template-columns: repeat(3, 300px);
+  grid-auto-rows: 398px;
+  column-gap: 63px;
+  row-gap: 60px;
+  text-align: left;
+}
+.work-item > img {
+  width: 300px;
+  height: 300px;
+  object-fit: cover;
+}
+.work-item h3 {
+  margin-top: 19px;
+  font-size: 18px;
+  font-weight: 700;
+  line-height: 30px;
+}
+.work-category {
+  display: inline-block;
+  margin-top: 19px;
+  padding: 3px 8px;
+  border-radius: 3px;
+  background: var(--soft-gray);
+  color: #555;
+  font-size: 14px;
+  line-height: 16px;
+  font-weight: 500;
+}
+.view-more {
+  display: inline-flex;
+  width: 165px;
+  height: 36px;
+  margin-top: 72px;
+  justify-content: center;
+  align-items: center;
+  border-radius: 24px;
+  background: var(--blue);
+  color: white;
+  font-size: 14px;
+}
+
+/* About */
+.about-section {
+  height: 534px;
+  padding-top: 74px;
+  background: #eeeeee;
+}
+.profile {
+  width: 740px;
+  margin: 63px auto 0;
+  transform: translateX(16px);
+  display: flex;
+  align-items: flex-start;
+  gap: 65px;
+}
+.profile-photo {
+  width: 180px;
+  height: 180px;
+  flex: 0 0 180px;
+  object-fit: cover;
+  object-position: center;
+  border-radius: 50%;
+}
+.profile-text { flex: 1; min-width: 0; max-width: 480px; }
+.profile-text h3 {
+  font-size: 32px;
+  font-weight: 400;
+  line-height: 39px;
+}
+.profile-text p {
+  margin-top: 16px;
+  font-size: 16px;
+  line-height: 19px;
+}
+
+/* Thin bottom copyright strip, as in the reference */
+.footer { height: 98px; background: white; }
+.footer-space { height: 85px; }
+.copyright {
+  height: 13px;
+  background: #0092f3;
+  color: white;
+  text-align: right;
+  padding-right: 10px;
+  font-size: 12px;
+  line-height: 13px;
+}
+.copyright small { font-size: inherit; }
