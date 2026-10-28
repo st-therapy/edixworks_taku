@@ -157,7 +157,7 @@ h1, h2, h3, p { margin: 0; }
   margin: 63px auto 0;
   display: grid;
   grid-template-columns: repeat(3, 300px);
-  grid-auto-rows: 398px;
+  grid-auto-rows: minmax(398px, auto);
   column-gap: 63px;
   row-gap: 60px;
   text-align: left;
@@ -172,6 +172,11 @@ h1, h2, h3, p { margin: 0; }
   font-size: 18px;
   font-weight: 700;
   line-height: 30px;
+}
+.work-description {
+  margin: 6px 0 0;
+  font-size: 14px;
+  line-height: 1.6;
 }
 .work-category {
   display: inline-block;
