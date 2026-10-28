@@ -13,7 +13,7 @@
 <body>
   <header class="hero" id="top">
     <div class="site-header">
-      <a class="logo" href="#top">Edix Works</a>
+      <a class="logo" href="#top">訪問リハビリテーション</a>
       <nav class="navigation" aria-label="メインナビゲーション">
         <a href="#service">Service</a>
         <a href="#works">Works</a>
@@ -23,7 +23,7 @@
     </div>
     <div class="hero-copy">
       <h1>MIKIKO</h1>
-      <p>東京都を拠点に活動するデザイナーです。グラフィックデザインとWebデザインが得意です。</p>
+      <p>新宿区を拠点に活動する言語聴覚士です。<br>障害や年齢にかかわらず「こんなことができたらいいな」という想いをお聴かせください。</p>
     </div>
   </header>
 
@@ -60,8 +60,7 @@
       <div class="works-grid">
         <article class="work-item">
           <img src="./assets/work6.jpg" alt="ブルーのスマートフォン画面デザイン" />
-          <h3>ポートフォリオサイト制作</h3>
-          <p class="work-description">Figmaでデザインを設計し、AIを活用して、HTML/CSSで実装した個人サイトです。</p>
+          <h3>プロジェクト名が入ります</h3>
           <span class="work-category">UIデザイン</span>
         </article>
         <article class="work-item">
@@ -101,8 +100,8 @@
       <div class="profile">
         <img class="profile-photo" src="./assets/about.jpg" alt="Tanaka Aoiのプロフィール写真" />
         <div class="profile-text">
-          <h3>Mikiko Taku</h3>
-          <p>WebデザインとAIコーディングを学習中ですが、できているのか、できていないのか、それさえもよくわからない・・・日々自分にガッカリです。</p>
+          <h3>Tanaka Aoi</h3>
+          <p>企業やサービスの課題をデザインの力で解決するWebデザイナーです。UI/UXを重視し、ユーザーの行動心理を踏まえた情報設計と、目的達成につながるビジュアル表現を得意としています。企画段階から関わり、デザインだけでなく、実装・改善までを一貫して対応。デザインの見た目だけでなく、成果を生む体験を設計することを大切にしています。</p>
         </div>
       </div>
     </section>
@@ -112,5 +111,26 @@
     <div class="footer-space"></div>
     <div class="copyright"><small>©Tanaka Aoi</small></div>
   </footer>
+  <script>
+    const revealTargets = document.querySelectorAll('.hero, main > section');
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    if ('IntersectionObserver' in window && !prefersReducedMotion) {
+      const revealObserver = new IntersectionObserver((entries, observer) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('reveal-pending');
+            requestAnimationFrame(() => entry.target.classList.add('reveal-visible'));
+            observer.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.1 });
+
+      revealTargets.forEach((target) => {
+        target.classList.add('reveal-pending');
+        revealObserver.observe(target);
+      });
+    }
+  </script>
 </body>
 </html>
