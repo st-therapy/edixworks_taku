@@ -13,7 +13,7 @@
 <body>
   <header class="hero" id="top">
     <div class="site-header">
-      <a class="logo" href="#top">訪問リハビリテーション</a>
+      <a class="logo" href="#top">訪問リハビリテーション  プレミアム</a>
       <nav class="navigation" aria-label="メインナビゲーション">
         <a href="#service">Service</a>
         <a href="#works">Works</a>
@@ -89,6 +89,14 @@
           <span class="work-category">ウェブデザイン</span>
         </article>
       </div>
+      <div class="works-pagination" aria-label="Worksのスライド">
+        <button class="works-dot" type="button" aria-label="1枚目を表示" aria-current="true"></button>
+        <button class="works-dot" type="button" aria-label="2枚目を表示"></button>
+        <button class="works-dot" type="button" aria-label="3枚目を表示"></button>
+        <button class="works-dot" type="button" aria-label="4枚目を表示"></button>
+        <button class="works-dot" type="button" aria-label="5枚目を表示"></button>
+        <button class="works-dot" type="button" aria-label="6枚目を表示"></button>
+      </div>
       <a href="#works" class="view-more">View More</a>
     </section>
 
@@ -98,10 +106,10 @@
         <p>私について</p>
       </div>
       <div class="profile">
-        <img class="profile-photo" src="./assets/about.jpg" alt="Tanaka Aoiのプロフィール写真" />
+        <img class="profile-photo" src="./assets/icon.png" alt="Tanaka Aoiのプロフィール写真" />
         <div class="profile-text">
-          <h3>Tanaka Aoi</h3>
-          <p>企業やサービスの課題をデザインの力で解決するWebデザイナーです。UI/UXを重視し、ユーザーの行動心理を踏まえた情報設計と、目的達成につながるビジュアル表現を得意としています。企画段階から関わり、デザインだけでなく、実装・改善までを一貫して対応。デザインの見た目だけでなく、成果を生む体験を設計することを大切にしています。</p>
+          <h3>Mikiko  Taku</h3>
+          <p>一人ひとりの「こうしたい」「こうありたい」を、大切に。<br><br>言語聴覚士として20年以上、大学病院などの医療や介護現場で、幅広い年代の方々を支援してきました。大切にしているのは、病気や障害だけでなく、その人の想いや、これからの暮らしを笑顔にすることです。「また話したい」「おいしく食べたい」「家族と出かけたい」そんな希望に寄り添い、ご本人、ご家族が自分らしく暮らしていけるよう、専門的な視点から一緒に考え、支えています。</p>
         </div>
       </div>
     </section>
@@ -130,6 +138,62 @@
         target.classList.add('reveal-pending');
         revealObserver.observe(target);
       });
+    }
+
+    const worksSlider = document.querySelector('.works-grid');
+    if (worksSlider) {
+      const workCards = Array.from(worksSlider.querySelectorAll('.work-item'));
+      const worksDots = Array.from(document.querySelectorAll('.works-dot'));
+
+      if (workCards.length === worksDots.length) {
+        let activeCardIndex = -1;
+        let scrollUpdateFrame = 0;
+
+        const updateActiveDot = () => {
+          const sliderCenter = worksSlider.getBoundingClientRect().left + worksSlider.clientWidth / 2;
+          let closestIndex = 0;
+          let closestDistance = Infinity;
+
+          workCards.forEach((card, index) => {
+            const cardCenter = card.getBoundingClientRect().left + card.offsetWidth / 2;
+            const distance = Math.abs(sliderCenter - cardCenter);
+            if (distance < closestDistance) {
+              closestDistance = distance;
+              closestIndex = index;
+            }
+          });
+
+          if (closestIndex === activeCardIndex) return;
+          activeCardIndex = closestIndex;
+          worksDots.forEach((dot, index) => {
+            if (index === activeCardIndex) dot.setAttribute('aria-current', 'true');
+            else dot.removeAttribute('aria-current');
+          });
+        };
+
+        worksDots.forEach((dot, index) => {
+          dot.addEventListener('click', () => {
+            const card = workCards[index];
+            const sliderLeft = worksSlider.getBoundingClientRect().left;
+            const cardLeft = card.getBoundingClientRect().left;
+            const centeredLeft = worksSlider.scrollLeft + cardLeft - sliderLeft - (worksSlider.clientWidth - card.offsetWidth) / 2;
+            worksSlider.scrollTo({
+              left: centeredLeft,
+              behavior: prefersReducedMotion ? 'auto' : 'smooth'
+            });
+          });
+        });
+
+        worksSlider.addEventListener('scroll', () => {
+          if (scrollUpdateFrame) return;
+          scrollUpdateFrame = requestAnimationFrame(() => {
+            scrollUpdateFrame = 0;
+            updateActiveDot();
+          });
+        }, { passive: true });
+        window.addEventListener('resize', updateActiveDot);
+        updateActiveDot();
+      }
     }
   </script>
 </body>
